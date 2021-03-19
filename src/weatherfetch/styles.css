@@ -1,0 +1,23 @@
+
+.footerText {
+  font-size: 3em;
+  margin: 0% auto;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 5%;
+}
+@media only screen and (max-width: 500px){
+  .footerText {
+    font-size: 1.5em;
+    margin: 0% auto;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 7.5%;
+  }
+}
+
+.weatherIcons{
+  max-width: 15em;
+}

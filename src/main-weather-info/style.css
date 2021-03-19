@@ -1,0 +1,44 @@
+span{
+    font-size: 6em;
+    font-weight: 450;
+    vertical-align: middle;
+}
+
+#weatherIcon{
+    margin-left: 2.5%;
+    font-weight: 200;
+}
+
+@media only screen and (max-width: 400px){
+    span{
+        margin-top: 0%;
+        font-size: 4em;
+        font-weight: 450;
+        vertical-align: middle;
+    }
+    
+    #weatherIcon{
+        margin-top: 0%;
+        max-height: 90%;
+    }
+}
+
+.weatherInfo{
+    min-height: 100%;
+}
+
+@media only screen and (max-width: 300px){
+    span{
+        margin-top: 0%;
+        margin-left: 0%;
+        font-size: 4em;
+        font-weight: 450;
+        vertical-align: middle;
+    }
+    
+    #weatherIcon{
+        margin-top: 0%;
+        max-height: 70%;
+        max-width: 70%;
+    }
+}
