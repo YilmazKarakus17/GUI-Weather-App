@@ -55,7 +55,7 @@ export default class Weatherfetch extends Component {
 
   checkTempImg = (icon) => {
     const icons = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
-    return <img className="weatherIcons col sn-5" src={icons} alt="" />;
+    return <img className="weatherIcons col sn-6" src={icons} alt="" />;
   };
 
   K2C(temp){
@@ -70,23 +70,23 @@ export default class Weatherfetch extends Component {
           <div className="allTime" key={index}>
             <div className="row">
               <h2 className="footerText col sn-5">Morning: </h2>
-              <h4 className="footerText col sn-2">
+              <h4 className="footerText col sn-1">
                 {this.K2C(item.daily[0].temp.morn)}°
               </h4>
                 {this.checkTempImg(item.daily[0].weather[0].icon)}{" "}
             </div>
 
             <div className="row">
-              <h2 className="footerText col sn-5">Evening: </h2>
-              <h4 className="footerText col sn-2">
+              <h2 className="footerText col sn-5">Afternoon: </h2>
+              <h4 className="footerText col sn-1">
                 {this.K2C(item.daily[0].temp.eve)}°{" "}
               </h4>
                 {this.checkTempImg(item.daily[0].weather[0].icon)}{" "}
             </div>
 
             <div className="row">
-              <h2 className="footerText col sn-5">Night: </h2>
-              <h4 className="footerText col sn-2">
+              <h2 className="footerText col sn-5">Evening: </h2>
+              <h4 className="footerText col sn-1">
                 {this.K2C(item.daily[0].temp.night)}°{" "}
               </h4>
                 {this.checkTempImg(item.daily[0].weather[0].icon)}{" "}

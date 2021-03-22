@@ -24,15 +24,6 @@ export default class WeatherStats extends React.Component {
         this.fetchGeographicLocation();
     }
 
-	componentDidMount() {
-		//updates the weather stats every 1 second
-		this.interval = setInterval(() => {this.fetchWeatherData();},60000)// The number of milliseconds between updates);
-  }
-
-	componentWillUnmount() {
-		clearInterval(this.interval); // resets the interval
-	}
-
 	fetchGeographicLocation() {
 		//First check if the browser supports geo locations
 		if (navigator.geolocation){
@@ -79,31 +70,29 @@ export default class WeatherStats extends React.Component {
 
 	// the main render method for the iphone component
 	render() {
-		// display all weather data
-		console.log(this.state.precipitation)
 		return (
-			<div class="container">
-				<div class="row p-2">
-				<div class="col-3">Air pollution</div>
-				<div class="col">
+			<div className="container">
+				<div className="row p-2">
+				<div className="col-3">Air pollution</div>
+				<div className="col">
 						<ProgressBarComponent percentage={this.state.air*20}/>
 				</div>
 				</div>
-				<div class="row p-2">
-				<div class="col-3">Humidity</div>
-				<div class="col">
+				<div className="row p-2">
+				<div className="col-3">Humidity</div>
+				<div className="col">
 					<ProgressBarComponent percentage={this.state.humidity}/>
 				</div>
 				</div>
-				<div class="row p-2">
-				<div class="col-3">Percipitation</div>
-				<div class="col">
+				<div className="row p-2">
+				<div className="col-3">Percipitation</div>
+				<div className="col">
 					<ProgressBarComponent percentage={this.state.precipitation*100}/>
 				</div>
 				</div>
-				<div class="row p-2">
-				<div class="col-3">Clouds</div>
-				<div class="col">
+				<div className="row p-2">
+				<div className="col-3">Clouds</div>
+				<div className="col">
 					<ProgressBarComponent percentage={this.state.clouds}/>
 				</div>
 				</div>

@@ -9,6 +9,20 @@ span{
     font-weight: 200;
 }
 
+@media only screen and (max-width: 500px){
+    span{
+        margin-top: 0%;
+        font-size: 4em;
+        font-weight: 450;
+        vertical-align: middle;
+    }
+    
+    #weatherIcon{
+        margin-top: 0%;
+        max-height: 80%;
+    }
+}
+
 @media only screen and (max-width: 400px){
     span{
         margin-top: 0%;
@@ -19,7 +33,7 @@ span{
     
     #weatherIcon{
         margin-top: 0%;
-        max-height: 90%;
+        max-height: 80%;
     }
 }
 
