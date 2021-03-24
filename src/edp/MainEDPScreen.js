@@ -50,7 +50,7 @@ const MainEDPScreen = () => {
                     <img src={laptopPic} style={stylePic} alt="laptopPic" />
                     {/* This icon is used to give the daily advice*/}
                     <PopupComponent iconImage={tipIcon} iconFloatDirection="right" 
-                    title="Daily Advice" time={hours} percentage={EDPpercentage} />
+                    title="Daily Advice For Todays Weather" time={hours} percentage={EDPpercentage} />
                 </div>
                 {/* percentage prop passed through to render progress bar */}
                 <ProgressBarComponent percentage={EDPpercentage}/>

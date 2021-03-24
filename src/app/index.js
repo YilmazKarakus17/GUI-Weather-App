@@ -18,12 +18,20 @@ import MainEDPScreen from '../edp/MainEDPScreen';
 import Weatherfetch from '../weatherfetch';
  // eslint-disable-next-line
 import WeatherStats from '../weather-stats';
+import WorldMap from "../world-map/WorldMap"
+import Toggler from "./Toggler"
+
 
 //Importing Swiper
 import Swiper from './Swiper.js'
 
 //Importing styling
 import './App.css';
+
+//imports for Toggler
+import Switch from '@material-ui/core/Switch';
+import { withStyles } from '@material-ui/core/styles';
+import { grey } from '@material-ui/core/colors';
 
 export default class App extends React.Component{
     constructor(props){
@@ -34,7 +42,8 @@ export default class App extends React.Component{
             weatherMain: "",
             weatherDesc: "",
             weatherIcon:"",
-            apiKey: "6ef9d69333030364ba9d9f06fb2b67d7"
+            apiKey: "6ef9d69333030364ba9d9f06fb2b67d7",
+            map: false
         }
     }
 
@@ -111,7 +120,6 @@ export default class App extends React.Component{
 		});
 	}
 
-
 	//returns a string representation of the current time
 	getCurrentTime(){
         //Declaring & initialising variables
@@ -137,7 +145,7 @@ export default class App extends React.Component{
 			return hr + ":" + min
 		}
 	}
-
+    function
     //Sets the apps background image to be representative of the current time
     setBackground(crntTime){
         //parsing the string argument crntTime to get the numeric representation of the current hour 
@@ -159,16 +167,56 @@ export default class App extends React.Component{
     }
 
     render(){
+        
         //Getting the current time
         let crntTime = this.getCurrentTime();
         //callin the setter method to set the background of the whole page
         this.setBackground(crntTime);
 
         let comArr = [<MainWeatherInfo temperature={parseInt(this.state.temp)} main={this.state.weatherMain.toString()} desc={this.state.weatherDesc.toString()} icon={this.state.weatherIcon.toString()} />, <MainEDPScreen />, <WeatherStats api={this.state.apiKey}/>]
+        let compArrFooterFalse = [<Weatherfetch />, <MainEDPScreen />]
+        let compArrFooterTrue = [<WorldMap apiKey={this.state.apiKey}/>, <MainEDPScreen />]
+        const Togglestyle = {
+            float: "left",
+            display: "inline"}
+
+        const GreySwitch = withStyles({
+            switchBase: {
+                color: grey[400],
+                '&$checked': {
+                    color: grey[50],
+                },
+                '&$checked + $track': {
+                    backgroundColor: grey[50],
+                },
+            },
+        checked: {},
+        track: {},
+        })(Switch);
+
+        
+        const handleChange = (event) => {
+            this.setState({
+                map: !this.state.map,
+            });
+    
+        };
+
         return(
             <div className="container" id="app">
                 <header className="row" style={{textAlign:'center',color:'white'}}>
                     <div className="container">
+                        <div style={Togglestyle}>
+                            <GreySwitch
+                            checked={this.state.map}
+                            onChange={handleChange}
+                            name={this.state.map}
+                            value={this.state.map}
+                            inputProps={{ 'aria-label': 'primary checkbox' }}
+                            />
+                            <b>World Map Toggle</b>
+                            {console.log(this.state.map)}
+                        </div>
                         <section className='row headerSection'>
                             <h1 className='col sn-12' id='crntTime'>{crntTime}</h1>
                         </section>
@@ -183,7 +231,7 @@ export default class App extends React.Component{
                 </div>
                 <hr className="SectionDividers"/>
                 <footer className="row">
-                 <Weatherfetch />
+                    {this.state.map ?  <Swiper compArr={compArrFooterTrue} /> : <Swiper compArr={compArrFooterFalse} />}
                 </footer>
             </div>
         );

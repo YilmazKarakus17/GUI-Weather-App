@@ -73,25 +73,25 @@ export default class WeatherStats extends React.Component {
 		return (
 			<div className="container">
 				<div className="row p-2">
-				<div className="col-3">Air pollution</div>
+				<div className="col-3 title">Air pollution</div>
 				<div className="col">
-						<ProgressBarComponent percentage={this.state.air*20}/>
+						<ProgressBarComponent  percentage={this.state.air*20}/>
 				</div>
 				</div>
 				<div className="row p-2">
-				<div className="col-3">Humidity</div>
+				<div className="col-3 title">Humidity</div>
 				<div className="col">
 					<ProgressBarComponent percentage={this.state.humidity}/>
 				</div>
 				</div>
 				<div className="row p-2">
-				<div className="col-3">Percipitation</div>
+				<div className="col-3 title">Percipitation</div>
 				<div className="col">
 					<ProgressBarComponent percentage={this.state.precipitation*100}/>
 				</div>
 				</div>
 				<div className="row p-2">
-				<div className="col-3">Clouds</div>
+				<div className="col-3 title">Clouds</div>
 				<div className="col">
 					<ProgressBarComponent percentage={this.state.clouds}/>
 				</div>

@@ -1,5 +1,6 @@
 .swal2-title {
-    color: white
+    color: white;
+    display: block;
 }
 
 .swal2-html-container { 
@@ -10,3 +11,4 @@
 .swal2-content {
     padding: 0
 }
+
