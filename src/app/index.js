@@ -19,11 +19,13 @@ import Weatherfetch from '../weatherfetch';
  // eslint-disable-next-line
 import WeatherStats from '../weather-stats';
 import WorldMap from "../world-map/WorldMap"
-import Toggler from "./Toggler"
+//import Toggler from "./Toggler"
 
 
 //Importing Swiper
 import Swiper from './Swiper.js'
+import Pagination from './Pagination'
+import SwipeableViews from 'react-swipeable-views';
 
 //Importing styling
 import './App.css';
@@ -43,7 +45,8 @@ export default class App extends React.Component{
             weatherDesc: "",
             weatherIcon:"",
             apiKey: "6ef9d69333030364ba9d9f06fb2b67d7",
-            map: false
+            map: false,
+            index: 0
         }
     }
 
@@ -63,8 +66,8 @@ export default class App extends React.Component{
 
         //checks sets the background every 5 mins
         setInterval(() => {
-            this.setBackground(crntTime)    
-        }, 300000)    
+            this.setBackground(crntTime)
+        }, 300000)
 	}
 
     /*==================================================== Class Methods ========================================= */
@@ -102,7 +105,7 @@ export default class App extends React.Component{
 		})
 	}
 
-    //Parsing the API response 
+    //Parsing the API response
     parseResponse = (parsed_json) => {
         var location = parsed_json['name'];
 		var temp_c = parsed_json['main']['temp'];
@@ -148,7 +151,7 @@ export default class App extends React.Component{
     function
     //Sets the apps background image to be representative of the current time
     setBackground(crntTime){
-        //parsing the string argument crntTime to get the numeric representation of the current hour 
+        //parsing the string argument crntTime to get the numeric representation of the current hour
         let hr = parseInt(crntTime[0] + crntTime[1])
 
         if (hr >= 5 && hr < 12){
@@ -157,7 +160,7 @@ export default class App extends React.Component{
         }
         else if (hr >=12 && hr < 18) {
             //If the current time is between 12pm - 6pm display the afternoon background
-            document.body.style["backgroundImage"] = `url(${AfternoonImage})`           
+            document.body.style["backgroundImage"] = `url(${AfternoonImage})`
         }
         else if (hr >= 18 || hr < 5){
             //If the current time is between 6pm - 5am display the evening background
@@ -166,74 +169,87 @@ export default class App extends React.Component{
 
     }
 
+
+    handleChangeIndex = index => {
+      this.setState({
+        index,
+      });
+    };
+
     render(){
-        
-        //Getting the current time
-        let crntTime = this.getCurrentTime();
-        //callin the setter method to set the background of the whole page
-        this.setBackground(crntTime);
+      const { index } = this.state;
 
-        let comArr = [<MainWeatherInfo temperature={parseInt(this.state.temp)} main={this.state.weatherMain.toString()} desc={this.state.weatherDesc.toString()} icon={this.state.weatherIcon.toString()} />, <MainEDPScreen />, <WeatherStats api={this.state.apiKey}/>]
-        let compArrFooterFalse = [<Weatherfetch />, <MainEDPScreen />]
-        let compArrFooterTrue = [<WorldMap apiKey={this.state.apiKey}/>, <MainEDPScreen />]
-        const Togglestyle = {
-            float: "left",
-            display: "inline"}
+      //Getting the current time
+      let crntTime = this.getCurrentTime();
+      //callin the setter method to set the background of the whole page
+      this.setBackground(crntTime);
 
-        const GreySwitch = withStyles({
-            switchBase: {
-                color: grey[400],
-                '&$checked': {
-                    color: grey[50],
-                },
-                '&$checked + $track': {
-                    backgroundColor: grey[50],
-                },
-            },
-        checked: {},
-        track: {},
-        })(Switch);
+      let comArr = [<MainWeatherInfo temperature={parseInt(this.state.temp)} main={this.state.weatherMain.toString()} desc={this.state.weatherDesc.toString()} icon={this.state.weatherIcon.toString()} />, <MainEDPScreen />, <WeatherStats api={this.state.apiKey}/>]
+      let compArrFooterFalse = [<Weatherfetch />, <MainEDPScreen />]
+      let compArrFooterTrue = [<WorldMap apiKey={this.state.apiKey}/>, <MainEDPScreen />]
+      const Togglestyle = {
+          float: "left",
+          display: "inline"}
 
-        
-        const handleChange = (event) => {
-            this.setState({
-                map: !this.state.map,
-            });
-    
-        };
+      const GreySwitch = withStyles({
+          switchBase: {
+              color: grey[400],
+              '&$checked': {
+                  color: grey[50],
+              },
+              '&$checked + $track': {
+                  backgroundColor: grey[50],
+              },
+          },
+      checked: {},
+      track: {},
+      })(Switch);
 
-        return(
-            <div className="container" id="app">
-                <header className="row" style={{textAlign:'center',color:'white'}}>
-                    <div className="container">
-                        <div style={Togglestyle}>
-                            <GreySwitch
-                            checked={this.state.map}
-                            onChange={handleChange}
-                            name={this.state.map}
-                            value={this.state.map}
-                            inputProps={{ 'aria-label': 'primary checkbox' }}
-                            />
-                            <b>World Map Toggle</b>
-                            {console.log(this.state.map)}
-                        </div>
-                        <section className='row headerSection'>
-                            <h1 className='col sn-12' id='crntTime'>{crntTime}</h1>
-                        </section>
-                        <section className='row headerSection'>
-                            <h2 className='col sn-12' id="city">{this.state.city}</h2>
-                        </section>
-                    </div>
-                </header>
-                <hr className="SectionDividers"/>
-                <div className="row" id="middleContent">
-                    <Swiper compArr={comArr} />
-                </div>
-                <hr className="SectionDividers"/>
-                <footer className="row">
-                    {this.state.map ?  <Swiper compArr={compArrFooterTrue} /> : <Swiper compArr={compArrFooterFalse} />}
-                </footer>
-            </div>
-        );
+
+      const handleChange = (event) => {
+          this.setState({
+              map: !this.state.map,
+          });
+
+      };
+
+      return(
+          <div className="container" id="app">
+              <header className="row" style={{textAlign:'center',color:'white'}}>
+                  <div className="container">
+                      <div style={Togglestyle}>
+                          <GreySwitch
+                          checked={this.state.map}
+                          onChange={handleChange}
+                          name={this.state.map}
+                          value={this.state.map}
+                          inputProps={{ 'aria-label': 'primary checkbox' }}
+                          />
+                          <b>World Map Toggle</b>
+                          {console.log(this.state.map)}
+                      </div>
+                      <section className='row headerSection'>
+                          <h1 className='col sn-12' id='crntTime'>{crntTime}</h1>
+                      </section>
+                      <section className='row headerSection'>
+                          <h2 className='col sn-12' id="city">{this.state.city}</h2>
+                      </section>
+                  </div>
+              </header>
+              <hr className="SectionDividers"/>
+              <div className="row" id="middleContent">
+                  <SwipeableViews enableMouseEvents index={index} onChangeIndex={this.handleChangeIndex}>
+                    <MainWeatherInfo temperature={parseInt(this.state.temp)} main={this.state.weatherMain.toString()} desc={this.state.weatherDesc.toString()} icon={this.state.weatherIcon.toString()} />
+                    <MainEDPScreen />
+                    <WeatherStats api={this.state.apiKey}/>
+                  </SwipeableViews>
+                  <Pagination dots={3} index={index} onChangeIndex={this.handleChangeIndex} />
+              </div>
+              <hr className="SectionDividers"/>
+              <footer className="row">
+                  {this.state.map ?  <Swiper compArr={compArrFooterTrue} /> : <Swiper compArr={compArrFooterFalse} />}
+              </footer>
+          </div>
+      );
     }
 }
