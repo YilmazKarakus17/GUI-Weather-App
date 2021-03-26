@@ -240,7 +240,7 @@ export default class App extends React.Component{
               <div className="row" id="middleContent">
                   <SwipeableViews enableMouseEvents index={index} onChangeIndex={this.handleChangeIndex}>
                     <MainWeatherInfo temperature={parseInt(this.state.temp)} main={this.state.weatherMain.toString()} desc={this.state.weatherDesc.toString()} icon={this.state.weatherIcon.toString()} />
-                    <MainEDPScreen />
+                    <MainEDPScreen main={this.state.weatherMain} description={this.state.weatherDesc} apiKey={this.state.apiKey}/>
                     <WeatherStats api={this.state.apiKey}/>
                   </SwipeableViews>
                   <Pagination dots={3} index={index} onChangeIndex={this.handleChangeIndex} />

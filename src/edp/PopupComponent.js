@@ -15,8 +15,8 @@ function randomElement(arr) {
 
 // This component uses the Icon Component as button which once clicked, activates an animation.
 // This animation was implemented using the sweetalert2 framework.
-const PopupComponent = ({iconImage, iconFloatDirection, title, text, time, percentage}) => {
-    
+const PopupComponent = ({iconImage, iconFloatDirection, title, text, time, main, description}) => {
+
     //below are the different arrays which contain the messages for the various different popups
     const arrDanger = [
          "The EDP is very high today so please have an umbrella with you at all times to prevent your device from getting damaged.",
@@ -54,10 +54,10 @@ const PopupComponent = ({iconImage, iconFloatDirection, title, text, time, perce
         */
         MySwal.fire({
             title: title,
-            imageUrl: percentage>75 ? umbrellaIcon : percentage>50 ? backpackIcon: percentage>=0 ? happyIcon : null,
+            imageUrl: main==='Clear' ? happyIcon : main==='Clouds' ? happyIcon : main==='Rain' ? umbrellaIcon : main==='Thunderstorm' ? umbrellaIcon : backpackIcon,
             imageWidth: 150,
             imageHeight: 150,
-            text: percentage>75 ? randomElement(arrDanger) : percentage>50 ? randomElement(arrWarning): percentage>=0 ? randomElement(arrSuccess) : text, 
+            text: main==='Clear' ? "Today's Weather: " + description + ". " + randomElement(arrSuccess) : main==='Clouds' ? "Today's Weather: " + description + ". " + randomElement(arrSuccess) : main==='Rain' ? "Today's Weather: " + description + ". " + randomElement(arrDanger) : main==='Thunderstorm' ? "Today's Weather: " + description + ". " + randomElement(arrDanger): "Today's Weather: " + description + ". " + randomElement(arrWarning),
             confirmButtonColor: time >= 5 && time < 12 ? "rgba(234,172,29)" : time >= 12 && time < 18 ? "rgba(29,170,234,)" : "rgba(41,29,191)",
             confirmButtonText: "Ok!",
             textColor:"#FFF",
@@ -80,7 +80,8 @@ PopupComponent.defaultProps = {
     title: 'Electronic Damage Percentage',
     time: 0,
     imageloc: 'https://unsplash.it/400/200',
-    text: 'Please Insert Text',
+    text: 'The Electronic Damage Percentage or EDP is calculated using various data from the weather forecast.It calculates the chances of your device being damaged due to heavy rainfall and bad weather. The lower the percentage, the less likely you are to damage you device',
+    imageUrl: null
 }
 
 
