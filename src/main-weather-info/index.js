@@ -28,7 +28,7 @@ export default class MainWeatherInfo extends React.Component{
         //Following conditions are based of the open weather API documentation found here: https://openweathermap.org/weather-conditions
         return(
             <section id="weatherInfo" className="col sn-12" style={{color:'white', textAlign:'center', minHeight:'100%'}}>
-                <span>{ temp }</span>
+                <span id="current-temp">{ temp }</span>
                 {this.getWeatherIcon(wthrIcon,wthrMain,wthrDesc)}
             </section>
         );

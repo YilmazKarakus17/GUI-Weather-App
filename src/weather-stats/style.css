@@ -3,5 +3,6 @@
 }
 
 .title {
-    padding-right: 10%;
+    padding-right: 1px;
+    vertical-align: middle;
 }
