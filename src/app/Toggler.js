@@ -39,7 +39,6 @@ const Toggler = ({toggle, map, title}) => {
             inputProps={{ 'aria-label': 'primary checkbox' }}
             />
             <b>{title}</b>
-            {console.log(map)}
         </div>
         
     )

@@ -226,7 +226,6 @@ export default class App extends React.Component{
                           inputProps={{ 'aria-label': 'primary checkbox' }}
                           />
                           <b>World Map Toggle</b>
-                          {console.log(this.state.map)}
                       </div>
                       <section className='row headerSection'>
                           <h1 className='col sn-12' id='crntTime'>{crntTime}</h1>

@@ -89,8 +89,6 @@ export default class ProgressBarComponentEDP extends React.Component {
       render() {
         //calculating the percentage using values from weather-stats screen
         var mainPercentage = this.state.main==='Clear' ? 10 : this.state.main==='Clouds' ? 15 : this.state.main==='Rain' ? 50 : this.state.main==='Thunderstorm' ? 90 : 25
-        console.log(mainPercentage)
-        console.log(((this.state.air*20) + (this.state.humidity) + (this.state.precipitation*100) + (this.state.clouds)) % 100)
         var percentage = Math.round((mainPercentage*0.7) + ((((this.state.air*20) + (this.state.humidity) + (this.state.precipitation*100) + (this.state.clouds))%100)*0.3))
         //mainPercentage*0.7
         return (
