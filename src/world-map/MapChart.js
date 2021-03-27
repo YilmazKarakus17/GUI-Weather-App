@@ -8,6 +8,8 @@ import {
   Geography
 } from "react-simple-maps";
 
+ /*This json file contains all the information of the different countries including names and alpha 2 names */
+ /*The alpha 2 names are used in conjunction with another frame work to get the capital city of the country */
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
@@ -37,25 +39,25 @@ const MapChart = ({apiKey, setTooltipContent }) => {
   return (
     <>
       <ComposableMap data-tip="" projectionConfig={{ scale: 150 }}>
-        <ZoomableGroup>
+        <ZoomableGroup> {/* This componet is retrieved from the framework which allows us to zoom into the map */}
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map(geo => (
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  onMouseEnter={() => {
+                  onMouseEnter={() => { /*The following function happens when the use presses a counrty on the map */
                     const { NAME, ISO_A2} = geo.properties;
-                    const countryInfo = mulk(ISO_A2)
+                    const countryInfo = mulk(ISO_A2) //using aplha names to get capital city of a country which will be used with the API to get the weather
                     fetchWeatherData(countryInfo.capital)
                     console.log(countryInfo.capital)
-                    setTooltipContent(`${NAME} -  ${Math.round(parseInt(temp)-273.15)}`);
+                    setTooltipContent(`${NAME} -  ${Math.round(parseInt(temp)-273.15)}°C`); //changing to celcius and pasting the result
                     console.log(`${NAME}`)
                   }}
-                  onMouseLeave={() => {
+                  onMouseLeave={() => { //on mouse leave, map returns back to default
                     setTooltipContent("");
                   }}
-                  style={{
+                  style={{ //styling for the world map using css
                     default: {
                       fill: "white",
                       outline: "none"

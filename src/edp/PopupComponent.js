@@ -44,7 +44,8 @@ const PopupComponent = ({iconImage, iconFloatDirection, title, text, time, main,
         The image of the popup changes depending on the percentage. This is mapped with the colour of the progress bar. 
         If a percentage prop is not passed in, no picture will render.
         The text also changes with the percentage. Depending on the current percentage, the randomElement fucntion will
-        be called to get a random message from the corresponding arryas.
+        be called to get a random message from the corresponding arryas. The description of the weather is also passed as
+        a prop from an api call to give the user more information about the weather.
         The time prop is used to determine the colour of the popup. There 3 distinct themes so using the time prop and 
         conditional rendering, we are able to set the different themes. For instance, from 05:00 till 12:00, the buttons,
         background and backdrop will be orange, however, this colour scheme will chance from 12:00 to 18:00 and 18:00 to

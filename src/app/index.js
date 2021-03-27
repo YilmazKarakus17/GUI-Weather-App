@@ -184,13 +184,14 @@ export default class App extends React.Component{
       //callin the setter method to set the background of the whole page
       this.setBackground(crntTime);
 
-      let comArr = [<MainWeatherInfo temperature={parseInt(this.state.temp)} main={this.state.weatherMain.toString()} desc={this.state.weatherDesc.toString()} icon={this.state.weatherIcon.toString()} />, <MainEDPScreen />, <WeatherStats api={this.state.apiKey}/>]
+      //creating arrays of components for the footer to prevent overflow
       let compArrFooterFalse = [<Weatherfetch />, <MainEDPScreen />]
       let compArrFooterTrue = [<WorldMap apiKey={this.state.apiKey}/>, <MainEDPScreen />]
       const Togglestyle = {
           float: "left",
           display: "inline"}
 
+      //This is switch used to switch between world map view and fetch weather info
       const GreySwitch = withStyles({
           switchBase: {
               color: grey[400],
@@ -218,7 +219,7 @@ export default class App extends React.Component{
               <header className="row" style={{textAlign:'center',color:'white'}}>
                   <div className="container">
                       <div style={Togglestyle}>
-                          <GreySwitch
+                          <GreySwitch {/*Implementing the switch */}
                           checked={this.state.map}
                           onChange={handleChange}
                           name={this.state.map}
@@ -227,16 +228,16 @@ export default class App extends React.Component{
                           />
                           <b>World Map Toggle</b>
                       </div>
-                      <section className='row headerSection'>
-                          <h1 className='col sn-12' id='crntTime'>{crntTime}</h1>
+                      <section className='row headerSection'> {/*Header Contains time and city*/}
+                          <h1 className='col sn-12' id='crntTime'>{crntTime}</h1> 
                       </section>
                       <section className='row headerSection'>
                           <h2 className='col sn-12' id="city">{this.state.city}</h2>
                       </section>
                   </div>
               </header>
-              <hr className="SectionDividers"/>
-              <div className="row" id="middleContent">
+              <hr className="SectionDividers"/> {/*Main section which can also be swiped and navigated using buttons*/}
+              <div className="row" id="middleContent">  {/*Contains main weather, edp screen and stats*/}
                   <SwipeableViews enableMouseEvents index={index} onChangeIndex={this.handleChangeIndex}>
                     <MainWeatherInfo temperature={parseInt(this.state.temp)} main={this.state.weatherMain.toString()} desc={this.state.weatherDesc.toString()} icon={this.state.weatherIcon.toString()} />
                     <MainEDPScreen main={this.state.weatherMain} description={this.state.weatherDesc} apiKey={this.state.apiKey}/>
@@ -245,7 +246,7 @@ export default class App extends React.Component{
                   <Pagination dots={3} index={index} onChangeIndex={this.handleChangeIndex} />
               </div>
               <hr className="SectionDividers"/>
-              <footer className="row">
+              <footer className="row"> {/*Used condtional rendering to switch between world map and weather info when button clicked*/}
                   {this.state.map ?  <Swiper compArr={compArrFooterTrue} /> : <Swiper compArr={compArrFooterFalse} />}
               </footer>
           </div>
