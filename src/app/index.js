@@ -243,6 +243,7 @@ export default class App extends React.Component{
                     <MainEDPScreen main={this.state.weatherMain} description={this.state.weatherDesc} apiKey={this.state.apiKey}/>
                     <WeatherStats api={this.state.apiKey}/>
                   </SwipeableViews>
+		  {/*Allows for pagination on the swipable view*/}
                   <Pagination dots={3} index={index} onChangeIndex={this.handleChangeIndex} />
               </div>
               <hr className="SectionDividers"/>
