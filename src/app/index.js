@@ -219,7 +219,8 @@ export default class App extends React.Component{
               <header className="row" style={{textAlign:'center',color:'white'}}>
                   <div className="container">
                       <div style={Togglestyle}>
-                          <GreySwitch {/*Implementing the switch */}
+                          {/*Implementing the switch */}
+                          <GreySwitch
                           checked={this.state.map}
                           onChange={handleChange}
                           name={this.state.map}
