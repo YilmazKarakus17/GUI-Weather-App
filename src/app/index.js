@@ -44,7 +44,7 @@ export default class App extends React.Component{
             weatherMain: "",
             weatherDesc: "",
             weatherIcon:"",
-            apiKey: "6ef9d69333030364ba9d9f06fb2b67d7",
+            apiKey: "EnterAPIKeyHere",
             map: false,
             index: 0
         }
