@@ -37,7 +37,7 @@ export default class Weatherfetch extends Component {
 
   fetchWeatherData(lat,lon){
 		// setting up the api key value and the longitude and latitude of the devices current location to be used in the API request
-		let apiKey = "7e36cf22a0239d331c9e9675dd3938ae";
+		let apiKey = "EnterAPIKeyHere";
 		let rqst = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat.toString() + "&lon=" + lon.toString() + "&appid=" + apiKey;
 		$.ajax({
 			url: rqst,
